@@ -1,11 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { Card } from '../components/Card';
 import { ProductosContext } from '../context/ProductosContext';
+import { CarritoContext } from '../context/CarritoContext';
 
 
 export const ComprasPage = () => {
     
     const { productos } = useContext( ProductosContext )
+    const {agregarCompra, eliminarCompra} = useContext(CarritoContext)
+
+    const handleAgregar = (compra) => {
+        agregarCompra(compra)
+
+    }
+    const hangleQuitar = (id) => {
+        eliminarCompra(id)
+
+    }
+
 
     return (
         <>
@@ -19,6 +31,8 @@ export const ComprasPage = () => {
                         titulo={producto.title}
                         descripcion={producto.description}
                         precio={producto.price}
+                        handleAgregar={() => handleAgregar(producto)}
+                        hangleQuitar={() => hangleQuitar(id)}
                     />
                 ))}
             </div>
